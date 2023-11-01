@@ -10,7 +10,7 @@ cd sbase-git
   # make CC="musl-gcc -static" -j$(nproc)
   make -j$(nproc)
 
-  make DESTDIR="../pkg" -j$(nproc) install
+  make DESTDIR="../pkg" PREFIX=/usr -j$(nproc) install
 cd ..
 
 rm -rvf sbase-git
