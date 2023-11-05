@@ -12,7 +12,9 @@ basestrap -C pacman.conf mere-chroot base-layout busybox
 basestrap -C pacman.conf mere-chroot base
 
 # extra packages needed
-basestrap -C pacman.conf mere-chroot build-base curl ca-certs
+basestrap -C pacman.conf mere-chroot build-base curl ca-certs git
 
 cp -v resolv.conf mere-chroot/etc/
 
+# this might be unecessary
+yes | pacman -Scc

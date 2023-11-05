@@ -1,1 +1,3 @@
 chroot/mere-chroot/
+sources/
+packages/*/pkg/
