@@ -1,0 +1,9 @@
+{
+  "package": "os",
+  "provides": [],
+  "dependencies": [],
+  "build_dependencies": [],
+  "version": "2023-11-06",
+  "url": "https://github.com/Dou2ble/apex",
+  "description": "Operating system identification"
+} 

@@ -1,0 +1,9 @@
+{
+  "package": "neatvi",
+  "provides": ["vi"],
+  "dependencies": ["musl"],
+  "build_dependencies": [],
+  "version": "12",
+  "url": "https://github.com/aligrudi/neatvi",
+  "description": "A small vi/ex editor for editing bidirectional UTF-8 text"
+}

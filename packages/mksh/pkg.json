@@ -1,0 +1,9 @@
+{
+  "package": "mksh",
+  "provides": ["mksh"],
+  "dependencies": ["musl"],
+  "build_dependencies": [],
+  "version": "R59c",
+  "url": "http://www.mirbsd.org/mksh.htm",
+  "description": "An actively developed free implementation of the Korn Shell programming language and a successor to the Public Domain Korn Shell (pdksh)."
+}
