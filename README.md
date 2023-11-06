@@ -2,7 +2,7 @@
 
 ## Packages todo (in order of importance):
 - [x] c compiler toolchain
-- [ ] text editor
+- [x] text editor
 - [ ] linux
 - [ ] make
 - [ ] git
