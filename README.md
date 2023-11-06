@@ -2,7 +2,7 @@
 
 ## Packages todo (in order of importance):
 - [x] c compiler toolchain
-- [ ] linux
+- [-] linux
 - [ ] git
 - [ ] openssl
 - [ ] pacakge mksh properly (http://www.mirbsd.org/mksh-faq.htm#packaging)
