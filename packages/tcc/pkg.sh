@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION="2c1c20a48cb1ee5628064aead877c1a1218d8344"
+VERSION=$(jq -r .version pkg.json)
 SRC="git://repo.or.cz/tinycc.git"
 
 git clone $SRC tcc-git

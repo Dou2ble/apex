@@ -1,0 +1,9 @@
+{
+  "package": "bdwgc",
+  "provides": ["lib/bdwgc"],
+  "dependencies": ["lib/musl"],
+  "build_dependencies": [],
+  "version": "8.2.4",
+  "url": "https://www.hboehm.info/gc/",
+  "description": "A conservative garbage collector can be used as a garbage collecting replacement for C malloc or C++ new."
+}

@@ -1,0 +1,9 @@
+{
+  "package": "tcc",
+  "provides": ["tcc"],
+  "dependencies": ["lib/musl"],
+  "build_dependencies": [],
+  "version": "2c1c20a48cb1ee5628064aead877c1a1218d8344",
+  "url": "https://bellard.org/tcc/",
+  "description": "Tiny C Compiler"
+}

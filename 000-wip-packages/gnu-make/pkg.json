@@ -1,0 +1,9 @@
+{
+  "package": "gnu-make",
+  "provides": ["make"],
+  "dependencies": ["lib/musl"],
+  "build_dependencies": [],
+  "version": "4.4.1",
+  "url": "",
+  "description": ""
+}

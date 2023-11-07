@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env mksh
+# shellcheck shell=ksh
 
 if [ $# -eq 0 ]
 then
@@ -8,10 +9,13 @@ fi
 
 cd "$(dirname "$0")" || exit 1
 
+# rm -v bin/${1}.tar.lz{,.sha512}
+
 cd packages || exit 1
   cd "$1" || exit 1
 
     rm -rvf pkg/
+    version=$(jq -r .version pkg.json)
 
     chmod -v +x pkg.sh
     ./pkg.sh
@@ -23,6 +27,12 @@ cd packages || exit 1
   cd ..
 cd ..
 
-mv "packages/${1}/pkg/${1}.tar.lz" bin/
+cd bin || exit 1
+
+  mv "../packages/${1}/pkg/${1}.tar.lz" "${1}-${version}.tar.lz"
+  sha512sum "${1}-${version}.tar.lz" > "${1}-${version}.tar.lz.sha512"
+
+cd ..
+
 
 

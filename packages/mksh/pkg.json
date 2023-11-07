@@ -1,7 +1,7 @@
 {
   "package": "mksh",
   "provides": ["mksh"],
-  "dependencies": ["musl"],
+  "dependencies": ["lib/musl"],
   "build_dependencies": [],
   "version": "R59c",
   "url": "http://www.mirbsd.org/mksh.htm",

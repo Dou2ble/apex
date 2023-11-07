@@ -1,6 +1,6 @@
 {
   "package": "musl",
-  "provides": [],
+  "provides": ["lib/musl"],
   "dependencies": [],
   "build_dependencies": [],
   "version": "1.2.3",

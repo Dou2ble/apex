@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION="6285c22a07893303bc8719afefe3e878ed6bc887"
+VERSION=$(jq -r .version pkg.json)
 SRC="git://git.suckless.org/sbase"
 
 git clone $SRC sbase-git
