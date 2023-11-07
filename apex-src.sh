@@ -16,13 +16,13 @@ cd packages || exit 1
     chmod -v +x pkg.sh
     ./pkg.sh
 
-    cd pkg
-      tar cvf "${1}.tar.lz" *
+    cd pkg || exit 1
+      tar cvf "${1}.tar.lz" ./*
     cd ..
 
   cd ..
 cd ..
 
-mv "packages/${1}/pkg/${1}.tar.lz" .
+mv "packages/${1}/pkg/${1}.tar.lz" bin/
 
 

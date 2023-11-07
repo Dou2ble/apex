@@ -1,8 +1,6 @@
 #!/usr/bin/env mksh
 # shellcheck shell=ksh
 
-VERSION="2023-11-06"
-
 mkdir -pv pkg/{boot,etc,home,var,mnt,dev,proc,sys,tmp,root,usr/{bin,lib,share,include}}
 
 ln -vs /usr/bin pkg/bin

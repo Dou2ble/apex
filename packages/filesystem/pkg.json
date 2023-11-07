@@ -1,0 +1,9 @@
+{
+  "package": "filesystem",
+  "provides": [],
+  "dependencies": [],
+  "build_dependencies": [],
+  "version": "2023-11-06",
+  "url": "https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html",
+  "description": "The basic filsystem layout."
+}

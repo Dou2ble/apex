@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION="1.2.3"
+VERSION=$(jq -r .version pkg.json)
 SRC="http://www.etalabs.net/musl/releases/musl-${VERSION}.tar.gz"
 
 curl -Lo musl.tar.gz $SRC
