@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION="a015607af0075badc0cd90523c43f391daa0572d"
+VERSION=$(jq -r .version pkg.json)
 SRC="git://git.suckless.org/ubase"
 
 git clone $SRC ubase-git
