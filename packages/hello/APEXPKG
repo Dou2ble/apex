@@ -1,0 +1,18 @@
+#!/usr/bin/env mksh
+
+version="2023-11-11"
+url="https://example.com/"
+
+build() {
+    printf '#!/bin/sh\nprintf "Hello, World!"\n' > hello
+    chmod +x hello
+}
+
+testing() {
+    [ "$(./hello)" = "Hello, World!" ] || return 1;
+}
+
+pkg() {
+    install -Dm 755 hello pkg/usr/bin/hello
+}
+

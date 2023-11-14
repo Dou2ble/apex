@@ -1,0 +1,106 @@
+#!/usr/bin/env mksh
+# shellcheck shell=ksh
+# shellcheck disable=SC1091
+
+# BLACK=$(tput setaf 0)
+RED=$(tput setaf 1)
+# GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+BLUE=$(tput setaf 4)
+# MAGENTA=$(tput setaf 5)
+# CYAN=$(tput setaf 6)
+# WHITE=$(tput setaf 7)
+
+BOLD=$(tput bold)
+# UNDERLINE=$(tput smul)
+# REVERSE=$(tput rev)
+RESET=$(tput sgr0)
+
+TAR_ERRER_MSG="Failed to create compressed tarball"
+
+name="$(basename "$(pwd)")"
+
+log_info() {
+    local arg1="$1"
+    printf "%s%s-> %s%s\n" "$BOLD" "$BLUE" "$arg1" "$RESET"
+}
+
+log_warn() {
+    local arg1="$1"
+    printf "%s%s--> %s%s\n" "$BOLD" "$YELLOW" "$arg1" "$RESET"
+}
+
+log_err() {
+    local arg1="$1"
+    printf "%s%s--> %s%s\n" "$BOLD" "$RED" "$arg1" "$RESET"
+    exit 1
+}
+
+
+# shourcing the APEXPKG
+source APEXPKG
+
+log_info "Creating work directory"
+rm -rf work
+mkdir work
+cd work || exit 1
+
+# downloading the sources
+# Check if the variable 'src' exists
+if [[ -v src ]]; then
+    log_info "Downloading sources for package: $name"
+    for element in "${src[@]}"; do
+	protocol="${element%%/*}"
+	url="${element#*/}"
+
+	case $protocol in
+	    curl)
+		curl -LO "$url"
+		;;
+	    git)
+		git clone "$url"
+		;;
+	    *)
+		log_err "Unknown protocol: $protocol"
+		;;
+	esac
+    done
+else
+    log_info "Package $name dosen't have any sources"
+fi
+
+# building the package
+log_info "Building package $name"
+build || log_err "Failed to build package: $name"
+log_info "Successfully built package $name"
+
+if type testing >/dev/null 2>&1; then
+    log_info "Testing package $name"
+    testing || log_err "Testing of package $name failed"
+    log_info "Successfully tested package $name"
+else
+    log_warn "Not test function availibe for package $name"
+fi
+
+log_info "Packaging package $name"
+pkg || log_err "Failed to build package $name"
+log_info "Successfully packaged $name"
+
+log_info "Creating compressed tarball"
+cd pkg || log_err "$TAR_ERRER_MSG"
+
+sltar c * > "$name-$version.tar" || log_err "$TAR_ERRER_MSG"
+lzip "$name-$version.tar"
+
+cd ../..
+
+mv "work/pkg/$name-$version.tar.lz" .
+rm -rf work
+
+log_info "Successfully created compressed tarball $name-$version.tar.lz"
+
+
+
+    
+
+

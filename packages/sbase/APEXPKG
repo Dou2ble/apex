@@ -1,0 +1,22 @@
+#!/usr/bin/env mksh
+
+src=("git/git://git.suckless.org/sbase")
+dependencies=("lib/musl")
+build_dependencies=("cc")
+version="6285c22a07893303bc8719afefe3e878ed6bc887"
+
+build() {
+    cd sbase
+
+    git checkout $VERSION
+    make
+
+    cd ..
+}
+
+pkg() {
+    cd sbase
+    make DESTDIR="../pkg" PREFIX=/usr install
+    cd ..
+}
+
