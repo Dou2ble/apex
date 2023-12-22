@@ -1,3 +1,6 @@
 old/chroot/mere-chroot/
 old/sources/
 old/packages/*/pkg/
+
+packages/*/*.tar.lz
+packages/*/work

@@ -3,7 +3,7 @@
 
 if [ $# -eq 0 ]
 then
-  echo "Please provide a package to build"
+  print "Please provide a package to build"
   exit 1
 fi
 

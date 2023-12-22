@@ -1,0 +1,30 @@
+#!/usr/bin/env mksh
+
+version="0.9.27"
+src=("curl/https://download.savannah.nongnu.org/releases/tinycc/tcc-${version}.tar.bz2")
+dependencies=("lib/musl")
+
+url="https://bellard.org/tcc"
+description="Tiny C Compiler"
+
+build() {
+  tar xvf "tcc-$version.tar.bz2"
+
+  cd "tcc-$version"
+
+    ./configure --prefix=/usr \
+                --config-musl \
+                --cc=clang
+  
+    make || return 1
+
+  cd ..
+}
+
+pkg() {
+  cd "tcc-$version"
+
+    make DESTDIR=../pkg install || return 1
+
+  cd ..
+}

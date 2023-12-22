@@ -1,0 +1,42 @@
+#!/usr/bin/env mksh
+
+version="R59c"
+src=("curl/https://github.com/MirBSD/mksh/archive/refs/tags/mksh-${version}.tar.gz")
+dependencies=("lib/musl")
+
+url="http://www.mirbsd.org/mksh.htm"
+description="An actively developed free implementation of the Korn Shell programming language and a successor to the Public Domain Korn Shell (pdksh)."
+
+
+build() {
+    tar xvf "mksh-${version}.tar.gz"
+
+    cd "mksh-mksh-$version"
+
+      chmod -v +x Build.sh
+      mkdir -v build-mksh build-lksh
+
+      cd build-mksh
+        
+        ../Build.sh -r || return 1
+
+      cd ..
+
+      cd build-lksh
+
+        ../Build.sh -r -L || return 1
+
+      cd ..
+
+
+    cd ..
+}
+
+pkg() {
+  install -Dm 755 "mksh-mksh-$version/build-mksh/mksh" "pkg/usr/bin/mksh"
+  install -Dm 644 "mksh-mksh-$version/mksh.1" "pkg/usr/share/man/man1/mksh.1"
+  install -Dm 644 "mksh-mksh-$version/dot.mkshrc" "pkg/etc/skel/.mkshrc"
+
+  install -Dm 755 "mksh-mksh-$version/build-lksh/lksh" "pkg/usr/bin/lksh"
+  install -Dm 644 "mksh-mksh-$version/lksh.1" "pkg/usr/share/man/man1/lksh.1"
+}

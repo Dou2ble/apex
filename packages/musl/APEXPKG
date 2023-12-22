@@ -1,0 +1,34 @@
+#!/usr/bin/env mksh
+
+version="1.2.3"
+src=("curl/http://www.etalabs.net/musl/releases/musl-${version}.tar.gz")
+
+url="https://musl.libc.org/"
+description="An implementation of the C standard library built on top of the Linux system call API, including interfaces defined in the base language standard, POSIX, and widely agreed-upon extensions."
+
+build() {
+  tar xvf "musl-$version.tar.gz" || return 1
+
+  cd "musl-$version" || return 1
+
+    unset CFLAGS CXXFLAGS
+
+    # sed -i "/utmpx.h/s@.*@#define __NEED_time_t\n#include <bits/alltypes.h>@" \
+    #   include/utmp.h
+
+    # rm -v src/legacy/utmpx.c include/utmpx.h
+    ./configure --prefix=/usr \
+                --syslibdir=/usr/lib
+
+    make || return 1
+
+  cd ..
+}
+
+pkg() {
+  cd "musl-$version" || return 1
+
+    make DESTDIR=../pkg install || return 1
+
+  cd ..
+}

@@ -1,0 +1,24 @@
+#!/usr/bin/env mksh
+
+src=("git/git://git.suckless.org/ubase")
+dependencies=("lib/musl")
+version="a015607af0075badc0cd90523c43f391daa0572d"
+
+url="https://core.suckless.org/ubase"
+description="A collection of unportable tools, similar in spirit to util-linux but much simpler."
+
+build() {
+    cd ubase
+
+    git checkout $VERSION || return 1
+    make || return 1
+
+    cd ..
+}
+
+pkg() {
+    cd ubase
+    make DESTDIR="../pkg" PREFIX=/usr install
+    cd ..
+}
+
