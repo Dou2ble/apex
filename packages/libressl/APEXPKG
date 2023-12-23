@@ -1,0 +1,29 @@
+#!/usr/bin/env mksh
+
+version="3.8.1"
+src=("curl/https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${version}.tar.gz")
+dependencies=("musl")
+
+url="https://www.libressl.org/"
+description="A version of the TLS/crypto stack forked from OpenSSL in 2014, with goals of modernizing the codebase, improving security, and applying best practice development processes."
+
+build() {
+  tar xvf "libressl-${version}.tar.gz"
+
+  cd "libressl-${version}" || return 1
+
+    ./configure --prefix=/usr \
+                --sbindir=/usr/bin \
+    
+    make || return 1
+
+  cd ..
+}
+
+pkg() {
+  cd "libressl-${version}" || return 1
+
+    make DESTDIR=$(realpath ../pkg) install
+
+  cd ..
+}

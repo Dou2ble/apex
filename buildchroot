@@ -1,0 +1,32 @@
+#!/usr/bin/env mksh
+
+packages=('filesystem' 'sbase-static' 'tcc-static' 'mksh-static' 'musl')
+rm -rfv chroot
+
+cd packages || exit 1
+
+  for package in "${packages[@]}"; do
+
+    cd "$package" || exit 1
+
+      ../../buildapex || exit 1
+
+    cd ..
+
+  done
+
+cd ..
+
+mkdir -v chroot
+
+cd chroot || exit 1
+
+  for package in "${packages[@]}"; do
+
+    tar xvf ../packages/${package}/*.tar.lz
+
+  done
+
+  ln -vs /usr/bin/mksh usr/bin/sh
+
+cd ..

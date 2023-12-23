@@ -1,10 +1,10 @@
 #!/usr/bin/env mksh
 
 src=("git/git://git.suckless.org/ubase")
-dependencies=("lib/musl")
+dependencies=("musl")
 version="a015607af0075badc0cd90523c43f391daa0572d"
 
-url="https://core.suckless.org/ubase"
+url="https://core.suckless.org/ubase/"
 description="A collection of unportable tools, similar in spirit to util-linux but much simpler."
 
 build() {

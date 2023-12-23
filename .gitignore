@@ -4,3 +4,5 @@ old/packages/*/pkg/
 
 packages/*/*.tar.lz
 packages/*/work
+
+chroot/*

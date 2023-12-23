@@ -47,7 +47,7 @@ log_err() {
 source APEXPKG
 
 log_info "Creating work directory"
-rm -rf work
+rm -rf work *.tar.lz
 mkdir work
 cd work || exit 1
 

@@ -16,6 +16,8 @@ build() {
       chmod -v +x Build.sh
       mkdir -v build-mksh build-lksh
 
+      export LDSTATIC=-static
+
       cd build-mksh
         
         ../Build.sh -r || return 1

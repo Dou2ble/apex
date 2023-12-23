@@ -14,7 +14,8 @@ build() {
 
     ./configure --prefix=/usr \
                 --config-musl \
-                --cc=clang
+                --enable-static \
+                --cc='clang -static' 
   
     make || return 1
 
