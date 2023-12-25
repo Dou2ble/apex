@@ -1,0 +1,26 @@
+#!/usr/bin/env mksh
+
+version="20230909"
+src=("curl/https://github.com/onetrueawk/awk/archive/refs/tags/${version}.tar.gz")
+
+url="https://github.com/onetrueawk/awk"
+description="This is the version of awk described in The AWK Programming Language, Second Edition, by Al Aho, Brian Kernighan, and Peter Weinberger."
+
+build() {
+  tar -xvf "${version}.tar.gz"
+
+  cd "awk-${version}" || return 1
+
+    make CC='clang -static' || return 1    
+
+  cd ..
+}
+
+pkg() {
+  cd "awk-${version}" || return 1
+
+    install -Dm0755 a.out "../pkg/usr/bin/awk"
+    install -Dm0644 awk.1 "../pkg/usr/share/man/man1/awk.1"
+
+  cd ..
+}

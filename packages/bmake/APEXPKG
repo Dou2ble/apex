@@ -1,0 +1,26 @@
+#!/usr/bin/env mksh
+
+version="20230909"
+src=("curl/https://www.crufty.net/ftp/pub/sjg/bmake-${version}.tar.gz")
+dependencies=("musl")
+
+url="https://www.crufty.net/help/sjg/bmake.html"
+description="Derived from NetBSD's make, its goal is to be a portable version of same, so new features are added via imports of NetBSD's make."
+
+build() {
+  tar xvf "bmake-${version}.tar.gz"  
+
+  cd bmake || return 1
+
+    ./boot-strap build
+
+  cd ..
+}
+
+pkg() {
+  cd bmake || return 1
+
+    ./boot-strap --install-destdir=../pkg --prefix=/usr op=install
+
+  cd ..
+}

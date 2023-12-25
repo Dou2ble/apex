@@ -2,7 +2,6 @@
 
 version="R59c"
 src=("curl/https://github.com/MirBSD/mksh/archive/refs/tags/mksh-${version}.tar.gz")
-dependencies=("musl")
 
 url="http://www.mirbsd.org/mksh.htm"
 description="An actively developed free implementation of the Korn Shell programming language and a successor to the Public Domain Korn Shell (pdksh)."

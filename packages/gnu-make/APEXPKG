@@ -1,0 +1,32 @@
+#!/usr/bin/env mksh
+
+version="4.3"
+src=("curl/https://ftp.gnu.org/gnu/make/make-${version}.tar.lz")
+dependencies=("musl")
+
+url="https://www.gnu.org/software/make/"
+description="A tool which controls the generation of executables and other non-source files of a program from the program's source files."
+
+build() {
+  tar xvf "make-${version}.tar.lz"
+
+  cd "make-${version}" || return 1
+
+    ./configure --prefix=/usr \
+                --without-guile \
+                CC='clang -static' || return 1
+
+    # sed -i 's/^LDFLAGS =/LDFLAGS = -static/' Makefile || return 1
+
+    make || return 1
+
+  cd ..
+}
+
+pkg() {
+  cd "make-${version}" || return 1
+
+    make DESTDIR=../pkg install || return 1
+
+  cd ..
+}

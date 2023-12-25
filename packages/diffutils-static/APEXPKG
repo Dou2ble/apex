@@ -1,0 +1,26 @@
+#!/usr/bin/env mksh
+
+version="3.10"
+src=("curl/https://ftp.gnu.org/gnu/diffutils/diffutils-${version}.tar.xz")
+
+url="https://www.gnu.org/software/diffutils/"
+description="A package of several programs related to finding differences between files."
+
+build() {
+  tar xvf "diffutils-${version}.tar.xz" || return 1
+
+  cd "diffutils-${version}" || return 1
+
+    ./configure --prefix=/usr  || return 1
+    make CC='clang -static'
+
+  cd ..
+}
+
+pkg() {
+  cd "diffutils-${version}" || return 1
+
+    make DESTDIR=$(realpath ../pkg) install
+
+  cd ..
+}
