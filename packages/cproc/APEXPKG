@@ -1,0 +1,27 @@
+#!/usr/bin/env mksh
+
+version="0985a7893a4b5de63a67ebab445892d9fffe275b"
+src=("git/https://git.sr.ht/~mcf/cproc")
+dependencies=("musl" "qbe")
+
+url="https://git.sr.ht/~mcf/cproc"
+description="A C11 compiler using QBE as a backend."
+
+build() {
+  cd cproc || retrun 1
+
+    git checkout "$version"
+
+    ./configure || return 1
+    make || return 1
+
+  cd ..
+}
+
+pkg() {
+  cd cproc || retrun 1
+
+    make DESTDIR=../pkg PREFIX=/usr install
+
+  cd ..
+}

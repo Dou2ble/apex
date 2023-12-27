@@ -1,0 +1,27 @@
+#!/usr/bin/env mksh
+
+version="2.41"
+src=("curl/https://ftp.gnu.org/gnu/binutils/binutils-${version}.tar.lz")
+dependencies=("musl")
+
+url="https://www.gnu.org/software/binutils/"
+description="A collection of binary tools."
+
+build() {
+  tar xvf "binutils-${version}.tar.lz" || return 1
+
+  cd "binutils-${version}" || return 1
+
+    ./configure --prefix=/usr || return 1
+    make || return 1
+
+  cd ..
+}
+
+pkg() {
+  cd "binutils-${version}" || return 1
+
+    make DESTDIR=../pkg install || return 1
+
+  cd ..
+}

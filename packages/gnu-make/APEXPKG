@@ -14,11 +14,15 @@ build() {
 
     ./configure --prefix=/usr \
                 --without-guile \
+                --disable-dependency-tracking \
                 CC='clang -static' || return 1
 
-    # sed -i 's/^LDFLAGS =/LDFLAGS = -static/' Makefile || return 1
+    awk '!/extern char \*alloca \(\);/' lib/glob.c > lib/glob.c.new
+    mv lib/glob.c.new lib/glob.c
 
-    make || return 1
+
+    ./build.sh || return 1
+    ./make || return 1
 
   cd ..
 }
@@ -26,7 +30,7 @@ build() {
 pkg() {
   cd "make-${version}" || return 1
 
-    make DESTDIR=../pkg install || return 1
+    ./make DESTDIR=../pkg install || return 1
 
   cd ..
 }

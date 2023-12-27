@@ -29,6 +29,7 @@ pkg() {
   cd "musl-$version" || return 1
 
     make DESTDIR=../pkg install || return 1
+    sudo ln -s /usr/lib/ld-musl-x86_64.so.1 ../pkg/usr/bin/ld
 
   cd ..
 }

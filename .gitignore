@@ -4,5 +4,7 @@ old/packages/*/pkg/
 
 packages/*/*.tar.lz
 packages/*/work
+packages/wip/*/work
+packages/wip/*/*.tar.lz
 
 chroot/*

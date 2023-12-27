@@ -1,0 +1,26 @@
+#!/usr/bin/env mksh
+
+version="1.1"
+src=("curl/https://c9x.me/compile/release/qbe-${version}.tar.xz")
+dependencies=("musl")
+
+url="https://c9x.me/compile/"
+description="A compiler backend that aims to provide 70% of the performance of industrial optimizing compilers in 10% of the code."
+
+build() {
+  tar xvf "qbe-${version}.tar.xz"
+
+  cd "qbe-$version" || return 1
+
+    make CC='clang -static' || return 1
+
+  cd ..
+}
+
+pkg() {
+  cd "qbe-$version" || return 1
+
+    make DESTDIR=../pkg PREFIX=/usr install || return 1
+
+  cd ..
+}

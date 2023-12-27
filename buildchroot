@@ -1,7 +1,7 @@
 #!/usr/bin/env mksh
 
-# required for:                       compiling c                compiling bmake     compiling 99% of c code
-packages=('filesystem' 'sbase-static' 'tcc-static' 'mksh-static' 'onetrueawk-static' 'musl')
+# required for:                       compiling c                compiling bmake    compiling bmake     compiling 99% of c code
+packages=('filesystem' 'sbase-static' 'tcc-static' 'mksh-static' 'diffutils-static' 'onetrueawk-static' 'musl' 'cproc-static' 'qbe-static')
 rm -rfv chroot
 
 cd packages || exit 1
@@ -29,6 +29,6 @@ cd chroot || exit 1
   done
 
   ln -vs /usr/bin/mksh usr/bin/sh
-  ln -vs /usr/bin/tcc usr/bin/cc
+  ln -vs /usr/bin/cproc usr/bin/cc
 
 cd ..
